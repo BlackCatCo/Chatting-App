@@ -131,6 +131,14 @@ with open("user.txt", "r") as db:
         autocorrect_label = tk.Label(settings_frame, text="Autocorrect", bg="#252525", fg="white", font=("Poppins", 14))
         autocorrect_label.pack(side=tk.LEFT, padx=10)
 
+        # create a label to display the username
+        with open("user.txt", "r") as db:
+            username = db.read()
+
+        username_label = tk.Label(settings_frame, text="Username: {}".format(username), bg="#252525", fg="white", font=("Poppins", 14))
+        username_label.pack(side=tk.RIGHT, padx=10)
+
+
         # create a canvas for the autocorrect setting
         autocorrect_canvas = tk.Canvas(settings_frame, width=30, height=30, bg="red", highlightthickness=0)
         autocorrect_canvas.pack(side=tk.LEFT)
