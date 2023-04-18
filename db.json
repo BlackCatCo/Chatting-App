@@ -14,7 +14,13 @@
             "members": [
                 "thbop"
             ],
-            "messages": []
+            "messages": [
+                {
+                    "user": "thbop",
+                    "content": "Hello world!",
+                    "timestamp": "04-18-23 16:58"
+                }
+            ]
         }
     ]
 }
