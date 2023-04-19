@@ -1,6 +1,8 @@
 import secrets
 from time import strftime
 
+
+
 class Chat:
     def __init__(self, db):
         self.db = db
@@ -26,7 +28,7 @@ class Chat:
                 index = i
         return index
 
-    def add(self): pass
+    def add(self): pass # User secrets.token_hex() for chat id
 
     def remove(self): pass
 
@@ -43,3 +45,15 @@ class Chat:
             return True
         else:
             return False
+    
+    def get_messages(self, chat_id, amount):
+        if amount > 100: # Set a cap on the amount of messages reqested.
+            amount = 100
+        chat = self.get(chat_id)
+        if chat == None:
+            return None
+        else:
+            if len(chat['messages']) < amount:
+                return chat['messages']
+            else:
+                return chat['messages'][ len(chat['messages']) - amount:]

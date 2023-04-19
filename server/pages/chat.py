@@ -38,6 +38,17 @@ class Chat:
                                     enough_data = False
 
                                 if enough_data: # If the message was provided
-                                    self.handler.chat.send(chat_id, user['name'].lower(), message)
+                                    self.handler.chat.send(chat_id, user['name'], message)
+
+                            elif action == 'get-messages':
+                                response['type'] = 'get-messages'
+                                try:
+                                    amount = data['amount']
+                                except KeyError:
+                                    response['error'] = 'No amount provided! Please provide a amount in the data key.'
+                                    enough_data = False
+
+                                if enough_data: # If the amount was provided
+                                    response['data'] = self.handler.chat.get_messages(chat_id, amount)
 
             return json.dumps(response)
