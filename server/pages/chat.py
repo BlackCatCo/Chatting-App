@@ -3,8 +3,32 @@ import json
 
 class Chat:
     def chat(self):
+        @self.app.route('/chat', methods=['POST'])
+        def chat():
+            response = {'type': None, 'error':None}
+            req = request.json
+            enough_data = True
+
+            try:
+                key = req['key']
+                action = req['action']
+            except KeyError:
+                response['error'] = 'Not enough data provided! Please send key and action.'
+                enough_data = False
+            
+            if enough_data:
+                user = self.handler.user.get(key)
+                if user == None:
+                    response['error'] = 'The user key provided is invalid and doesn not correspond to any user! Please provide another key.'
+                else:
+                    if action == 'get-chats':
+                        response['chats'] = self.handler.chat.get_user_chats(user['name'])
+
+            return json.dumps(response)
+        
+
         @self.app.route('/chat/<chat_id>', methods=['POST'])
-        def chat(chat_id):
+        def chat_id(chat_id):
             response = {'type': None, 'error':None}
             req = request.json
             enough_data = True
@@ -52,3 +76,4 @@ class Chat:
                                     response['data'] = self.handler.chat.get_messages(chat_id, amount)
 
             return json.dumps(response)
+

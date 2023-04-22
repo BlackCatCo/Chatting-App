@@ -57,3 +57,10 @@ class Chat:
                 return chat['messages']
             else:
                 return chat['messages'][ len(chat['messages']) - amount:]
+    
+    def get_user_chats(self, name):
+        ids = []
+        for chat in self.db.data['chats']:
+            if name in chat['members']:
+                ids.append(chat['id'])
+        return ids

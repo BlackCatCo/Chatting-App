@@ -139,12 +139,28 @@ class Client:
         }
         res = self.send_req_raw('/chat/' + chat_id, data)
         return res
+
+    def req_chats(self):
+        '''
+        
+        '''
+        data = {
+            'key': self.data['key'],
+            'action': 'get-chats'
+        }
+        res = self.send_req_raw('/chat' , data)
+        if res['error'] == None:
+            self.data['cache']['known-chats'] = res['chats']
+            self.save_data()
+        return res
         
 
 if __name__ == '__main__':
     client = Client()
-    # client.login('Thbop', 'Beef64')
+    client.login('Thbop', 'Beef64')
     chat_id = client.get_known_chats()[0]
+
+    client.req_chats()
 
 
     # print(client.send_message(chat_id, 'Jag tycker om ost.'))
@@ -152,3 +168,4 @@ if __name__ == '__main__':
     # messages = client.req_messages(chat_id, 2)
     # for m in messages['data']:
     #     print(f"{ m['user'] } [{ m['timestamp'] }]: { m['content'] }")
+
