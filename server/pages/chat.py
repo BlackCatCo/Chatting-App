@@ -50,7 +50,7 @@ class Chat:
                     if user == None:
                         response['error'] = 'The user key provided is invalid and doesn not correspond to any user! Please provide another key.'
                     else: # If the user is a valid user
-                        if user['name'].lower() not in chat['members']:
+                        if user['name'] not in chat['members']:
                             response['error'] = f'Chat "{ chat["id"] }" does not contain the member "{ user["name"] }."'
                         else: # If the user is in the chat
                             if action == 'send-message':
