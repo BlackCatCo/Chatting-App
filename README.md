@@ -1,4 +1,7 @@
 # Chatting-App
+##################################
+***This project is paused either temporarily or indefinitely.***
+###################################
 
 This Chatting App is a nice little open-source flask application with some gui applets.
 
